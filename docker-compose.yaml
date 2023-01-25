@@ -21,6 +21,8 @@ services:
       - POSTGRES_DB=todo_db
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=password
+    volumes:
+      - todo_postgres_data:/var/lib/postgresql/data
 
   react:
     container_name: ui
@@ -30,3 +32,6 @@ services:
       - 3000:3000
     volumes:
       - ./ui/src:/ui/src
+
+volumes:
+  todo_postgres_data:
