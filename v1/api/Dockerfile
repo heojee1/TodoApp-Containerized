@@ -16,4 +16,4 @@ RUN chmod o+x /entrypoint.sh
 
 # EXPOSE 8000
 
-ENTRYPOINT ["sh", "-c", "/entrypoint.sh"]
+# ENTRYPOINT ["sh", "-c", "/entrypoint.sh"]
