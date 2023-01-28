@@ -14,6 +14,10 @@ class App extends Component {
         content: ""
       },
     };
+    // this.api_server = 'http://localhost:8000/'
+    // if (process.env.REACT_APP_API_SERVER == 'producion') {
+    //   this.api_server = process.env.REACT_APP_API_SERVER;
+    // }
   }
 
   componentDidMount() {
@@ -22,32 +26,32 @@ class App extends Component {
 
   refreshList = () => {
     axios
-      .get("http://127.0.0.1/api/todos/")
+      .get("http://localhost/api/todos/")
       .then((res) => this.setState({ todoList: res.data }))
       .catch((err) => console.log(err));
   };
 
   toggle = () => {
     this.setState({ modal: !this.state.modal });
-  };
+  };s
 
   handleSubmit = (item) => {
     this.toggle();
 
     if (item.id) {
       axios
-        .put(`http://localhost:8000/api/todos/${item.id}/`, item)
+        .put(`http://localhost/api/todos/${item.id}/`, item)
         .then((res) => this.refreshList());
       return;
     }
     axios
-      .post("http://localhost:8000/api/todos/", item)
+      .post("http://localhost/api/todos/", item)
       .then((res) => this.refreshList());
   };
 
   handleDelete = (item) => {
     axios
-      .delete(`http://localhost:8000/api/todos/${item.id}/`)
+      .delete(`http://localhost/api/todos/${item.id}/`)
       .then((res) => this.refreshList());
   };
 
