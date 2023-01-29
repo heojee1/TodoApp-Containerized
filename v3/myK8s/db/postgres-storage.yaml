@@ -2,7 +2,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: postgres-pv-volume
-  # namespace: todo-app
+  namespace: todo-app
   labels:
     type: local
     app: postgres
@@ -19,7 +19,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: postgres-pv-claim
-  # namespace: todo-app
+  namespace: todo-app
   labels:
     app: postgres
 spec:

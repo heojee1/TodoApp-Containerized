@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-api-deployment
-  # namespace: todo-app
+  namespace: todo-app
   labels:
     app: todo-api
 spec:
@@ -22,14 +22,10 @@ spec:
         - containerPort: 8000
         envFrom:
           - configMapRef:
-              name: postgres-config
+              name: api-config
         env:
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: postgres-secret
                 key: POSTGRES_PASSWORD
-      hostAliases:
-      - hostnames:
-        - "postgres-service"
-        ip: "192.168.64.6"
