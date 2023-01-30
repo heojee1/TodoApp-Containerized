@@ -19,7 +19,10 @@ kubectl apply -f myK8s/db/
 
 4. Start API service
 ```console
-kubectl apply -f myK8s/api/
+kubectl apply -f myK8s/api/api-config.yaml
+kubectl apply -f myK8s/api/api-deployment.yaml
+kubectl apply -f myK8s/api/api-service.yaml
+kubectl apply -f myK8s/api/api-ingress.yaml
 ```
 
 5. Start UI service
