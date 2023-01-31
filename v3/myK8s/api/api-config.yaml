@@ -4,7 +4,7 @@ metadata:
   name: api-config
   namespace: todo-app
   labels:
-    app: postgres
+    app: todo-api
 data:
   POSTGRES_DB: tododb
   POSTGRES_USER: admin

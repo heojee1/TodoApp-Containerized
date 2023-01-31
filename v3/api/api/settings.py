@@ -133,7 +133,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS=True # Add this line too
 
 CORS_ORIGIN_WHITELIST = [
-    
      'http://localhost:3000',
-     'http://ui:3000'
+     'http://ui:3000',
+    #  'http://todo-app.com',
+    #  'http://todo-app-helm.com'
 ]

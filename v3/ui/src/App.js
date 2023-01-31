@@ -26,7 +26,7 @@ class App extends Component {
 
   refreshList = () => {
     axios
-      .get("http://localhost/api/todos/")
+      .get("http://api.todo-app-helm.com/api/todos/")
       .then((res) => this.setState({ todoList: res.data }))
       .catch((err) => console.log(err));
   };
@@ -40,18 +40,18 @@ class App extends Component {
 
     if (item.id) {
       axios
-        .put(`http://localhost/api/todos/${item.id}/`, item)
+        .put(`http://api.todo-app-helm.com/api/todos/${item.id}/`, item)
         .then((res) => this.refreshList());
       return;
     }
     axios
-      .post("http://localhost/api/todos/", item)
+      .post("http://api.todo-app-helm.com/api/todos/", item)
       .then((res) => this.refreshList());
   };
 
   handleDelete = (item) => {
     axios
-      .delete(`http://localhost/api/todos/${item.id}/`)
+      .delete(`http://api.todo-app-helm.com/api/todos/${item.id}/`)
       .then((res) => this.refreshList());
   };
 
