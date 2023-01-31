@@ -4,6 +4,8 @@ import axios from "axios";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
+const API_SERVER = process.env.REACT_APP_API_SERVER
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -14,10 +16,6 @@ class App extends Component {
         content: ""
       },
     };
-    // this.api_server = 'http://localhost:8000/'
-    // if (process.env.REACT_APP_API_SERVER == 'producion') {
-    //   this.api_server = process.env.REACT_APP_API_SERVER;
-    // }
   }
 
   componentDidMount() {
@@ -26,32 +24,32 @@ class App extends Component {
 
   refreshList = () => {
     axios
-      .get("http://api.todo-app-helm.com/api/todos/")
+      .get(`${API_SERVER}/api/todos/`)
       .then((res) => this.setState({ todoList: res.data }))
       .catch((err) => console.log(err));
   };
 
   toggle = () => {
     this.setState({ modal: !this.state.modal });
-  };s
+  };
 
   handleSubmit = (item) => {
     this.toggle();
 
     if (item.id) {
       axios
-        .put(`http://api.todo-app-helm.com/api/todos/${item.id}/`, item)
+        .put(`${API_SERVER}/api/todos/${item.id}/`, item)
         .then((res) => this.refreshList());
       return;
     }
     axios
-      .post("http://api.todo-app-helm.com/api/todos/", item)
+      .post(`${API_SERVER}/api/todos/`, item)
       .then((res) => this.refreshList());
   };
 
   handleDelete = (item) => {
     axios
-      .delete(`http://api.todo-app-helm.com/api/todos/${item.id}/`)
+      .delete(`${API_SERVER}/api/todos/${item.id}/`)
       .then((res) => this.refreshList());
   };
 

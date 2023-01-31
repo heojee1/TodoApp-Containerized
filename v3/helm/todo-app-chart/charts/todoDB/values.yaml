@@ -1,0 +1,41 @@
+enabled: true
+
+replicaCount: 1
+name: postgres
+group: db
+
+postgres:
+  app: todo-db
+  container:
+    image:
+      repository: postgres:14.1-alpine
+      pullPolicy: IfNotPresent
+    port: 5432
+  env: []
+  config:
+    data:
+      - key: key
+        value: value
+  secret:
+    type: Opaque
+    data: []
+  storage:
+    name: postgres-storage
+    mountPath: /var/lib/postgresql/data
+    pv:
+      kind: PersistentVolume
+      name: postgres-pv-volume
+      storageClassName: microk8s-hostpath
+      capacity: 100M
+      accessMode: ReadWriteMany
+      hostPath: "/opt/postgres/data"
+    pvc:
+      kind: PersistentVolumeClaim
+      name: postgres-pv-claim
+      storageClassName: microk8s-hostpath
+      capacity: 100M
+      accessMode: ReadWriteMany
+  service:
+    type: ClusterIP
+    port: 5432
+

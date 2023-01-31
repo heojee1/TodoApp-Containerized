@@ -5,8 +5,8 @@ metadata:
   namespace: todo-app
 spec:
   rules:
-    # - host: todo-app.com
-    - http:
+    - host: todo-app.com
+      http:
         paths:
           - path: /
             pathType: Prefix

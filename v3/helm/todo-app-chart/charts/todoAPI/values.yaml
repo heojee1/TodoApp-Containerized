@@ -1,0 +1,33 @@
+enabled: true
+
+replicaCount: 3
+name: todo-api
+group: backend
+
+api:
+  app: todo-api
+  container:
+    image:
+      repository: localhost:32000/todo-api
+    port: 8000
+    env: []
+    config:
+      data:
+        - key: key
+          value: value
+  ingress:
+    name: api-ingress
+    host:
+      hostName: api.todo-app-helm-subchart.com
+      paths:
+        - path: /api
+          pathType: Prefix
+          backend:
+            serviceName: todo-api-service-subchart
+            servicePort: 8080
+  service:
+    type: ClusterIP
+    protool: TCP
+    port: 8080
+
+

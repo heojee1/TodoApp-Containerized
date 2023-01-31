@@ -1,0 +1,26 @@
+enabled: true
+
+replicaCount: 3
+name: todo-ui
+group: frontend
+
+ui:
+  app: todo-ui
+  container:
+    image:
+      repository: localhost:32000/todo-ui
+    port: 80
+  ingress:
+    name: ui-ingress
+    host:
+      hostName: todo-app-helm-subchart.com
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            serviceName: todo-ui-service-subchart
+            servicePort: 8080
+  service:
+    type: ClusterIP
+    protocol: TCP
+    port: 8080

@@ -1,0 +1,98 @@
+todoDB:
+  app: todo-app
+  group: db
+
+  postgres:
+    name: todo-db
+    
+    config:
+      name: postgres-config
+      data:
+        - key: POSTGRES_DB
+          value: tododb
+        - key: POSTGRES_USER
+          value: admin
+    
+    secret:
+      name: postgres-secret
+      data:
+        - key: POSTGRES_PASSWORD
+          value: password
+    
+    storage:
+      pv:
+        hostPath: "/opt/postgres/helm-data/"
+
+
+todoAPI:
+  app: todo-app
+  group: backend
+
+  api:
+    name: todo-api
+    
+    config:
+      name: api-config
+      data:
+        - key: POSTGRES_DB
+          value: tododb
+        - key: POSTGRES_USER
+          value: admin
+        - key: POSTGRES_HOST
+          value: todo-db-service
+        - key: POSTGRES_PORT
+          value: 5432
+        - key: DJANGO_SUPERUSER_EMAIL
+          value: admin@admin.com
+        - key: DJANGO_SUPERUSER_USERNAME
+          value: admin
+        - key: DJANGO_SUPERUSER_PASSWORD
+          value: password
+    
+    secret:
+      name: postgres-secret
+      data:
+        - key: POSTGRES_PASSWORD
+    
+    ingress:
+      name: api-ingress
+      annotations:
+        - key: nginx.ingress.kubernetes.io/enable-cors
+          value: "true"
+        - key: nginx.ingress.kubernetes.io/cors-allow-methods
+          value: "PUT, GET, POST, OPTIONS"
+        - key: nginx.ingress.kubernetes.io/cors-allow-origin
+          value: "*"
+        - key: nginx.ingress.kubernetes.io/cors-allow-credentials
+          value: "true"
+      host:
+        hostName: api.todo-app.com
+        paths: 
+          - path: /admin
+            pathType: Prefix
+            backend:
+              serviceName: todo-api-service
+              servicePort: 8080
+          - path: /api
+            pathType: Prefix
+            backend:
+              serviceName: todo-api-service
+              servicePort: 8080
+
+
+todoUI:
+  app: todo-app
+  group: frontend
+
+  ui:
+    name: todo-ui  
+    ingress:
+      name: ui-ingress
+      host:
+        hostName: todo-app.com
+        paths: 
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: todo-ui-service
+              servicePort: 8080

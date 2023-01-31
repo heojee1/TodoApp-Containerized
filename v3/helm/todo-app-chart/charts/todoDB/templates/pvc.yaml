@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: {{ .Values.postgres.storage.pvc.kind }}
+metadata:
+  name: {{ .Values.postgres.storage.pvc.name }}
+  labels:
+    app: {{ .Values.app }}
+    group: {{ .Values.group }}
+spec:
+  storageClassName: {{ .Values.postgres.storage.pvc.storageClassName }}
+  accessModes:
+    - {{ .Values.postgres.storage.pvc.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.postgres.storage.pvc.capacity }}

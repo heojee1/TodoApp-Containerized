@@ -9,14 +9,14 @@ RUN npm install
 # Copy the source code of the application into the /app folder of the container
 COPY . .
 # Specify that we want a production build (smaller)
-ARG configuration=development
+ARG configuration=production
 
-ARG API_SERVER
+ARG API_SERVER='http://api.todo-app.com'
 ENV REACT_APP_API_SERVER=${API_SERVER}
 
 # Run the actual build and put the output in the folder /app/dist/out in the container
-RUN npm run build --configuration $configuration
-
+RUN REACT_APP_API_SERVER=${API_SERVER} \
+    npm run build --configuration $configuration
 
 # Stage 2, create a container with nginx
 # that serves the files created in the previous build
