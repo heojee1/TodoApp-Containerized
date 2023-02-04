@@ -5,7 +5,7 @@ metadata:
   namespace: todo-app
   annotations:
     nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "DELETE, PUT, GET, POST, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
 spec:
@@ -13,14 +13,7 @@ spec:
     - host: api.todo-app.com
       http:
         paths:
-          - path: /admin
-            pathType: Prefix
-            backend:
-              service:
-                name: todo-api-service
-                port:
-                  number: 8000
-          - path: /api
+          - path: /
             pathType: Prefix
             backend:
               service:

@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: todo-ui-container
-        image: localhost:32000/todo-ui:latest
+        image: localhost:32000/todo-ui:v1
         ports:
         - containerPort: 80

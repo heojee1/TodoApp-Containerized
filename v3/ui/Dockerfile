@@ -8,7 +8,7 @@ RUN npm install
 COPY . .
 
 ARG configuration=production
-ARG API_SERVER='http://api.todo-app.com'
+ARG API_SERVER='https://api.todo-app.com'
 ENV REACT_APP_API_SERVER=${API_SERVER}
 
 RUN REACT_APP_API_SERVER=${API_SERVER} \
