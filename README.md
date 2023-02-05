@@ -71,6 +71,29 @@ microk8s helm3 uninstall todo-app-helm -n todo-app-helm
 microk8s helm3 ls -n todo-app-helm
 ```
 
+## 5. Rollout update
+1. Make a change in ```return HttpResponse("Version: v1")``  in api/todos/view.py to ```return HttpResponse("Version: v2")`
+2. Change the appVersion in ```helm/todo-app-chart/charts/todoAPI/Chart.yaml``` to ```"v2"```
+2. Build and push the api image again (eg. ```docker build -t localhost:32000/todo-api:v2 ./api``` and 
+```docker push localhost:32000/todo-api:v2```)
+3. Upgrade helm chart
+```console
+microk8s helm3 upgrade todo-app-helm ./helm/todo-app-chart/ -n todo-app-helm
+```
+4. Observe the rollout
+```console
+kubectl -n todo-app-helm get pods -w
+```
+
+## 6. Canary update
+1. Apply the new deployment file manually
+```console
+kubectl apply -f canary-api.yaml -n todo-app-helm
+```
+2. Observe the deployment and their labels
+```console
+kubectl -n todo-app-helm get pods --show-labels -w
+```
 
 ## GCP 
 
