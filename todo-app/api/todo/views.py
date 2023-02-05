@@ -10,4 +10,4 @@ class TodoView(viewsets.ModelViewSet):
     queryset = Todo.objects.all()
 
 def version(request):
-    return HttpResponse("Version: canary")
+    return HttpResponse("Version: v1")
