@@ -10,5 +10,3 @@ COPY ./Pipfile* ./
 RUN pipenv sync
 
 COPY . .
-
-COPY ./entrypoint.sh /entrypoint.sh
