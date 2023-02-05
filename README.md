@@ -18,20 +18,23 @@ docker push localhost:32000/todo-ui:<version>
 127.0.0.1 todo-app.com api.todo-app.com
 ```
 
-## 3. Deploy using Kubernetes (no helm charts)
-3. Start Postgres service
+## 3. create TLS certificate
+1. Create certificate and key
 ```console
-kubectl apply -f k8s/db/
+certificate/certificate.sh
+```
+2. Create Kubernetes TLS secret
+```console
+kubectl create secret tls my-tls-secret --cert=vu.swc.nl.crt --key=vu.swc.nl.key
 ```
 
-4. Start API service
+3. Disable ingress addon
 ```console
-kubectl apply -f k8s/api/
+microk8s disable ingress
 ```
-
-5. Start UI service
+5. Re-enable ingress with default TLS certificate
 ```console
-kubectl apply -f k8s/ui/
+microk8s enable ingress:default-ssl-certificate=default/my-tls-secret
 ```
 
 ## 4. Deploy using Helm Charts
