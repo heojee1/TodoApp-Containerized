@@ -29,3 +29,24 @@ kubectl apply -f myK8s/api/api-ingress.yaml
 ```console
 kubectl apply -f myK8s/ui/
 ```
+
+
+# GCP 
+1- Initialize GCloud CLI 
+```console
+gcloud init
+```
+
+2- Create new cluster 
+```console
+gcloud container clusters create --binauthz-evaluation-mode=PROJECT_SINGLETON_POLICY_ENFORCE --zone us-central1-a  sf-todo-app-cluster
+```
+
+
+
+3- Configure this cluster with kube.config
+```console
+gcloud container clusters get-credentials --zone us-central1-a sf-todo-app-cluster
+```
+
+4-Run the apply -f commands as mentioned in previous sections
