@@ -14,20 +14,20 @@ docker push localhost:32000/todo-ui:latest
 
 3. Start Postgres service
 ```console
-kubectl apply -f myK8s/db/
+kubectl apply -f k8s/db/
 ```
 
 4. Start API service
 ```console
-kubectl apply -f myK8s/api/api-config.yaml
-kubectl apply -f myK8s/api/api-deployment.yaml
-kubectl apply -f myK8s/api/api-service.yaml
-kubectl apply -f myK8s/api/api-ingress.yaml
+kubectl apply -f k8s/api/api-config.yaml
+kubectl apply -f k8s/api/api-deployment.yaml
+kubectl apply -f k8s/api/api-service.yaml
+kubectl apply -f k8s/api/api-ingress.yaml
 ```
 
 5. Start UI service
 ```console
-kubectl apply -f myK8s/ui/
+kubectl apply -f k8s/ui/
 ```
 
 
