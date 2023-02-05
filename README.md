@@ -32,19 +32,24 @@ kubectl apply -f myK8s/ui/
 
 
 # GCP 
-1- Initialize GCloud CLI 
+
+1- Install Google Cloud CLI with the installation guide mentioned below 
+ ```console
+ https://cloud.google.com/sdk/docs/install
+ ```
+2- Initialize GCloud CLI 
 ```console
 gcloud init
 ```
 
-2- Create new cluster 
+3- Create new cluster 
 ```console
 gcloud container clusters create --binauthz-evaluation-mode=PROJECT_SINGLETON_POLICY_ENFORCE --zone us-central1-a  sf-todo-app-cluster
 ```
 
 
 
-3- Configure this cluster with kube.config
+4- Configure this cluster with kube.config
 ```console
 gcloud container clusters get-credentials --zone us-central1-a sf-todo-app-cluster
 ```
