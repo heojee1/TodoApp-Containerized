@@ -1,5 +1,11 @@
 # sf-todo-app
 
+## Project overview
+We built a simple todo app using React (UI) and Django (API).
+UI will be available on todo-app.com and API information will be available on api.todo-app.com.
+On the index page of api.todo-app.com, you can see the version information of the app (must be set manually in api/todos/view.py).
+On api.todo-app.com/api/todos, you can see the current list of tasks.
+
 1. Build API docker image and push it to the registry
 ```console
 docker build -t localhost:32000/todo-api:v1 ./api
